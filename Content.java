@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -73,29 +74,44 @@ public class Content extends AppCompatActivity {
 
         }
     }
+
+
     public void scrollArticles(){
         scroller.removeAllViews();// Kill Scrollview's child from last time this ran (and I hope its children?)
         LinearLayout scrollvert = new LinearLayout(this); // Make a new linear layout
         scrollvert.setOrientation(LinearLayout.VERTICAL);// Make it a vertical layout
         scroller.addView(scrollvert); // add this layout to Scrollview (scroller)
-        TextView[] tv=new TextView[teacher.getArticles().size()*2];
+        TextView[] tv=new TextView[teacher.getArticles().size()];
 
-        int counter = 0;
+
 
         for (int i = 0; i < teacher.getArticles().size(); i++) { //use this line to remove exception of indexoutofbound
-            tv[counter] = new TextView(this);
-            tv[counter].setText(teacher.getArticles().get(i).getTitle());
+            tv[i] = new TextView(this);
+            tv[i].setText(teacher.getArticles().get(i).getTitle());
 //tv[i].setLayoutParams(new ViewGroup.LayoutParams (ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            tv[counter].setTextSize(26);
-            scrollvert.addView(tv[counter]);
-            counter++;
-            tv[counter] = new TextView(this);
-            tv[counter].setText(teacher.getArticles().get(i).getArticle());
-//tv[i].setLayoutParams(new ViewGroup.LayoutParams (ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            tv[counter].setTextSize(13);
-            scrollvert.addView(tv[counter]); //make this change. Adding to linear layout which is only one child of scrollview.
+            tv[i].setTextSize(40);
+            final int finalI = i;
+            tv[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Click(v, teacher.getArticles().get(finalI).getTitle(), teacher.getArticles().get(finalI).getArticle());
+                }
+            });
+            scrollvert.addView(tv[i]);
         }
     }
+
+    private void Click(View v, String title, String article) {
+        Intent intent = new Intent(this, Detailed.class);
+
+        intent.putExtra("title", title);
+        intent.putExtra("article", article);
+        startActivity(intent);
+    }
+
+
+
+
     public void signOut(View view) {
         FirebaseAuth.getInstance().signOut();
 

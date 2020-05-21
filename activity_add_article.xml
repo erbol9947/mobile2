@@ -15,7 +15,9 @@
         android:autofillHints=""
         android:ems="10"
 
+
         android:gravity="start|top"
+        android:hint="Write your Text"
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,14 +41,14 @@
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="85dp"
+        android:layout_marginStart="96dp"
         android:layout_marginTop="26dp"
         android:layout_marginBottom="33dp"
+        android:autofillHints=""
         android:ems="10"
+        android:hint="Title of text"
         android:inputType="textPersonName"
-        android:text="@string/title"
         app:layout_constraintBottom_toTopOf="@+id/articleText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
